@@ -1,0 +1,135 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+#map-template{
+    height: 100%;
+    width: 100%;
+    top: 0;    
+}
+
+.vertical-nav {
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+}
+
+/* for toggle behavior */
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+  #content.active {
+    margin-left: 17rem;
+    width: calc(100% - 17rem);
+  }
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+
+body {
+  background: #f1f5f8;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+
+.text-gray {
+  color: #aaa;
+}
+
+#sidebarCollapse {
+  cursor: pointer;
+}
+
+/*DATATABLES*/
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+  color:white !important;
+  border:0px solid #979797;
+  background-color:#87CEEB;
+  border-radius: 30%;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  font-size: .8rem;
+  color: #e2e2e2!important;
+}
+
+.dataTable thead {
+  background-color: #126c95!important;
+  color: white
+}
+
+.dt-right {
+  text-align: right;
+}
+
+.dt-left {
+  text-align: left;
+}
+
+.dt-center {
+  text-align: center;
+}
+/*DATATBLES FIN*/
+
+/*CALENDARIO*/
+.date-picker-wrapper {
+  border-radius: 10px;
+  background-color: #f1f5f8!important;
+  padding: 10px!important;
+}
+
+.date-picker-wrapper .drp_top-bar .apply-btn {
+  cursor: pointer!important;
+  color:white!important;
+  border: solid 1px #0076a3!important;
+  background: #0095cd!important
+}
+
