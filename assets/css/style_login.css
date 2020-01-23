@@ -26,3 +26,31 @@
 .banner-text h2{color:#fff; font-weight:600;}
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}
+
+@media only screen and (max-width:720px) {
+	.banner-sec {
+		display: none;
+	}
+
+	.container {
+		box-shadow: none;
+		overflow: scroll;
+	}
+
+	.logo-movil {
+		display: block!important;
+		margin-bottom: 5%;
+	}
+
+	.login-block{
+		background: transparent;
+		float:left;
+		width:100%;
+		padding : 5% 0;
+		min-height: 100%; 
+		height: auto!important; 
+		position: relative;
+		top: 0; 
+		left: 0;
+	}
+}

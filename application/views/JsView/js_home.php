@@ -1,5 +1,9 @@
 <script type="text/javascript">
 
+
+//tiempo transcurrido//
+
+
 $(document).ready( function() {
     var d = new Date();    
     FechaActual = (d.getFullYear())+`-`+(d.getMonth()+1)+`-`+(d.getDate());
@@ -47,7 +51,7 @@ $( "#cDtVisitas").change(function() {
     table.page.len(this.value).draw();
 });
 
-function initMap(latitud,longitud) {
+function initMap(latitud,longitud) {    
 	$("#bodyModal")
     .empty()
     .html(`<div id="map-template" style="height: 450px"></div>`);
@@ -69,7 +73,23 @@ function initMap(latitud,longitud) {
     	prefix: 'fas'
 	})};
 
-	L.marker([latitud,longitud], redMarker).bindPopup('Punto de visita').addTo(map);
+    L.marker([latitud,longitud], redMarker).bindPopup('Cargando direccion aproximada...').addTo(map);
+
+    //RECUPERA EL NOMBRE DE LA CIUDAD
+    $.ajax({
+        dataType: "json",
+        url: "http://nominatim.openstreetmap.org/reverse",
+        type: "get",
+        data: {
+            format: "json",
+            lat:latitud,
+            lon:longitud
+        }
+    }).done(function(data) {
+        ciudad = data.display_name;
+        L.marker([latitud,longitud], redMarker).bindPopup(ciudad).addTo(map);
+    });
+	
 	$('#mdDetails').on('shown.bs.modal', function() {
 	  map.invalidateSize();
 	});
@@ -105,7 +125,9 @@ function generateTableVisitas(s1, s2) {
         ],
         "language": {
             "info": `<p class="font-weight-bold">Se encontraron _TOTAL_ registros</p>`,
+            "infoEmpty": "",
             "zeroRecords": `<i class="fas fa-search"></i> Sin resultados`,
+            "infoFiltered": "",
             "paginate": {
                 "first":      "Primera",
                 "last":       "Última ",
@@ -159,7 +181,9 @@ function generateTableMedicos(ruta) {
         ],
         "language": {
             "info": `<p class="font-weight-bold">Se encontraron _TOTAL_ registros</p>`,
+            "infoEmpty": "",
             "zeroRecords": `<i class="fas fa-search"></i> Sin resultados`,
+            "infoFiltered": "",
             "paginate": {
                 "first":      "Primera",
                 "last":       "Última ",
@@ -174,12 +198,14 @@ function generateTableMedicos(ruta) {
             { "title": "Nombre",    	"data": "nombre" },
             { "title": "Dirección", 	"data": "direccion" },
             { "title": "Clínica",       "data": "nom_clinica" },
-            { "title": "Ruta",          "data": "ruta" },
+            { "title": "Visitador",     "data": "vendedor" },
+            { "title": "Ruta",          "data": "ruta" }
         ],
         "columnDefs": [
           {"className": "dt-center", "targets": [ 3 ]},
-          /*{"className": "dt-left", "targets": [ 1 , 3 ] },
-          { "width": "20%", "targets": [ 1, 2, 4 ] }*/
+          { "visible": false, "targets": 4 },
+          { "width": "20%", "targets": 3 }
+          /*{"className": "dt-left", "targets": [ 1 , 3 ] }*/
         ],
         "fnInitComplete": function () {     
             $("#tblMedicos_length").hide();
@@ -188,10 +214,12 @@ function generateTableMedicos(ruta) {
     });
 }
 
-function details(idReporte, idMedico) {
+function details(idReporte, idMedico, vendedor, cliente) {
     $("#bodyModal")
     .empty()
     .html(`
+    <p class="pr-3 pl-3"><strong>Cliente:</strong> `+cliente+`</p>
+    <p class="pr-3 pl-3"><strong>Visitador:</strong> `+vendedor+`</p>
     <div class="row pr-3 pl-3">
         <div class="col-sm-6">
             <div class="card">
@@ -270,12 +298,11 @@ function details(idReporte, idMedico) {
                     { "title": "Articulo",      "data": "articulo" },
                     { "title": "Descripcion",   "data": "descripcion" },
                     { "title": "Cant.",         "data": "cantidad" },
-                    { "title": "U/M",           "data": "unidad" },
-                    { "title": "Ruta",          "data": "ruta" }
+                    { "title": "U/M",           "data": "unidad" }
                 ],
                 "columnDefs": [
                     {"className": "dt-left",    "targets": [ 1 ]},
-                    {"className": "dt-center",  "targets": [ 0, 2, 3, 4 ]},
+                    {"className": "dt-center",  "targets": [ 0, 2, 3 ]},
                     { "width": "25%", "targets": [ 1 ] },
                     { "width": "15%", "targets": [ 0 ] }
                 ],
@@ -449,5 +476,4 @@ function detailsMed(idMedico) {
         }
     });
 }
-
 </script>

@@ -36,7 +36,7 @@ class home_model extends CI_Model {
                 $Dta[$i]['coment']      = ($key['Comentario']=='')?"<p class='text-danger'>Sin comentario</p>":$key['Comentario'];
                 $Dta[$i]['fecha']       = date('d/m/Y', strtotime($key['Fecha']));
                 $Dta[$i]['direccion']   = '<a href="#!" onclick="initMap( '."'".$key['Latitud']."'".','."'".$key['Longitud']."'".' )"><i class="fas fa-map-marker-alt text-danger"></i></a>';
-                $Dta[$i]['details']     = '<a href="#!" onclick="details( '."'".$key['id_reporte']."'".', '."'".$key['IdMedico']."'".' )"><i class="fas fa-info-circle"></i></a>';
+                $Dta[$i]['details']     = '<a href="#!" onclick="details( '."'".$key['id_reporte']."'".', '."'".$key['IdMedico']."'".', '."'".$key['Nombre']."'".', '."'".$key['NombreCliente']."'".' )"><i class="fas fa-info-circle"></i></a>';
 
                 $i++;
             }
@@ -60,7 +60,7 @@ class home_model extends CI_Model {
         if ($DTA->num_rows()>0) {
             foreach ( $DTA->result_array() as $key ) {
                 $tmp[$i]['value'] = $key['Ruta'];
-                $tmp[$i]['desc']  = $key['Ruta'];
+                $tmp[$i]['desc']  = $this->returnNombreUsuario($key['Ruta']);
                 $i++;
             }
             return $tmp;
@@ -68,6 +68,22 @@ class home_model extends CI_Model {
             return false;
         }  
     }
+
+    public function returnNombreUsuario($ruta) {
+        $DTA=$this
+            ->db
+            ->where("Usuario", $ruta)
+            ->get("usuario");
+
+        if ($DTA->num_rows()>0) {
+            return $DTA->result_array()[0]['Nombre'];
+        }
+
+        return false;
+    }
+
+
+
 
     public function returnDataMedico($ruta) {
         $Dta=array();
@@ -82,6 +98,7 @@ class home_model extends CI_Model {
             foreach ($query->result_array() as $key) {
                 $Dta[$i]['nombre']          = '<a href="#!" onclick="detailsMed( '."'".$key['id_medico']."'".')">'.$key['NombreCliente'].'</a>';
                 $Dta[$i]['ruta']            = $key['Ruta'];
+                $Dta[$i]['vendedor']        = $this->returnNombreUsuario($key['Ruta']);
                 $Dta[$i]['direccion']       = $key['Direccion'];
                 $Dta[$i]['nom_clinica']     = $key['NombreClinica'];
                 $i++;
