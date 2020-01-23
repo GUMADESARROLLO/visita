@@ -139,3 +139,6 @@ body {
   background: #0095cd!important
 }
 
+.DrawBorder{
+  border: solid 2px black;
+}

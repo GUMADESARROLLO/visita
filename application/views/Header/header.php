@@ -44,7 +44,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/pedidos")?>" class="nav-link text-dark">
+      <a href="<?php echo base_url("index.php/clientes")?>" class="nav-link text-dark">
         <i class="fas fa-users mr-3 text-primary fa-1x"></i>Clientes
       </a>
     </li>

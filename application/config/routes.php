@@ -27,3 +27,9 @@ $route['downloadExcel']					= 'pedidos_controller/descargarExcelPedidos';
 $route['visitas']						= 'visitas_controller';
 $route['obtenerDataVisitas']			= 'visitas_controller/returnDataVisita';
 $route['obtenerDetVisita']				= 'visitas_controller/returnDetalleVisita';
+
+//RUTAS: CLIENTES
+$route['clientes']                      = 'clientes_controller';
+$route['obtenerDataClientes']			= 'clientes_controller/returnDataClientes';
+$route['returnHistoricoCliente']		= 'clientes_controller/returnHistoricoCliente';
+
