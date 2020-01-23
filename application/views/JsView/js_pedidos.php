@@ -18,6 +18,21 @@ $(document).ready( function() {
     });
 });
 
+$("#filterDtPedidos").on("keyup",function() {
+    var table = $("#tblPedidos").DataTable();
+    table.search(this.value).draw();
+});
+
+$( "#cDtPedidos").change(function() {
+    var table = $('#tblPedidos').DataTable();
+    table.page.len(this.value).draw();
+});
+
+$("#selectRuta").on('change', function(event) {
+    var table = $("#tblPedidos").DataTable();
+    table.search(this.value).draw();
+});
+
 function generateTablePedidos(F1, F2) {
     $('#tblPedidos').DataTable({
         "ajax": {
@@ -44,6 +59,8 @@ function generateTablePedidos(F1, F2) {
         "language": {
             "info": `<p class="font-weight-bold">Se encontraron _TOTAL_ registros</p>`,
             "zeroRecords": `<i class="fas fa-search"></i> Sin resultados`,
+            "info": "Registro _START_ a _END_ de _TOTAL_ entradas",
+            "infoEmpty": "",
             "paginate": {
                 "first":      "Primera",
                 "last":       "Última ",
@@ -51,12 +68,12 @@ function generateTablePedidos(F1, F2) {
                 "previous":   "Anterior"
             },
             "lengthMenu": "_MENU_",
-            "emptyTable": `Realice su busqueda por el filtro de fechas <i class="fas fa-binoculars text-danger"></i>`,
+            "emptyTable": `Realice su busqueda por el Filtro por Fechas <i class="fas fa-binoculars text-danger"></i>`,
             "search":     "BUSCAR"
         },
         'columns': [
             { "title": "N°",            "data": "idPedido" },
-            { "title": "Vendedor", 		"data": "nom_ruta" },
+            { "title": "Visitador", 	"data": "nom_ruta" },
             { "title": "Responsable", 	"data": "responsable" },
             { "title": "Cliente", 	    "data": "cliente" },
             { "title": "Nombre", 	    "data": "nombre" },
@@ -78,7 +95,14 @@ function generateTablePedidos(F1, F2) {
 var F1;
 var F2;
 $("#exp-to-excel").click( function() {
-	alert("fecha 1: "+F1+" fecha 2:"+F2)
+    ruta = $("#selectRuta option:selected").val();
+
+    if (F1===``||F1===undefined && F2===``||F2===undefined) {
+        mensaje("Seleccione un rango de fechas para generar el reporte", "error")
+    }else {
+        //alert("../index.php/pedidos_controller/descargarExcelPedidos/"+F1+"/"+F2+"/"+ruta)
+       location.href = "../index.php/visitas_controller/descargarExcelVisitas/"+F1+"/"+F2+"/"+ruta;
+    }
 })
 
 function detailsPedido(idPedido, nom_ruta, nom_cliente) {
@@ -89,9 +113,9 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
         <div class="col-sm-12">      
             <div class="row m-0">
                 <div class="col-sm-12">
-                    <p class="font-weight-bold m-0 text-center" id="txtPedido"></p>
-                    <p class="font-weight-bold m-0 text-center" id="txtCliente"></p>
-                    <p class="font-weight-bold mb-3 text-center" id="txtRuta"></p>
+                    <p class="font-weight-bold m-0" id="txtPedido"></p>
+                    <p class="font-weight-bold m-0" id="txtCliente"></p>
+                    <p class="font-weight-bold mb-3" id="txtRuta"></p>
                 </div>
             </div>
             <div class="row">
@@ -117,15 +141,13 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
                 </div>
             </div>
             <table class="table table-bordered table-sm mt-3" id="tblTemporal" width="100%">
-                 <tfoot>
-                 <th></th>
-                 <th></th>
-                 <th></th>
-                 <th>0.00</th>
-                 <th>0.00</th>
-                 </tfoot>
-
-
+                <tfoot>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tfoot>
             </table>
         </div>
     </div>`);
@@ -160,15 +182,14 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
                 'columns': [
                     { "title": "Articulo",      "data": "ARTICULO" },
                     { "title": "Descripcion",   "data": "DESCRIPCION" },
-                    { "title": "Cant.",         "data": "CANTIDAD" },
+                    { "title": "Cant.",         "data": "CANTIDAD", render: $.fn.dataTable.render.number( ',', '.', 0 ) },
                     { "title": "Precio",        "data": "TOTAL" },
                     { "title": "Bonificado",    "data": "BONIFICADO" }
                 ],
                 "columnDefs": [
-                    {"className": "dt-left",    "targets": [  ]},
-                    {"className": "dt-center",  "targets": [  ]},
-                    { "width": "25%", "targets": [  ] },
-                    { "width": "15%", "targets": [  ] }
+                    {"className": "dt-right",   "targets": [ 3 ]},
+                    {"className": "dt-center",  "targets": [ 0, 2, 3, 4 ]},
+                    /*{ "width": "50%",           "targets": [ 0,2 ] }*/
                 ],
                 initComplete: function () {
                     var api = this.api();
@@ -176,17 +197,27 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
                         var tt  = 0;
                         api.columns([i]).every( function () {
                             this.data().each( function ( d, j ) {
-                                tt += parseFloat(numeral(d).format('00.00'));
+                                tt += parseFloat(numeral(d).format('00.00,00'));
                             } );
                         } );
-                        if ( i==2 || i==3 ) {
-                            $retVal = numeral(tt).format("00");
+                        $retVal = ( i == 2 ) ? numeral(tt).format("0,0") : (numeral(tt).format("0,0.00"));
+
+                        if ( i==3 ) {
                             $( api.column( i ).footer() ).html($retVal);
                         }
                     }
                     $("#tblTemporal_length, #tblTemporal_filter").hide();
-                    $('#tblTemporal_paginate').appendTo('#id_pg');
                 }
+            });
+
+            $("#filterTmp1").on("keyup",function() {
+                var table = $("#tblTemporal").DataTable();
+                table.search(this.value).draw();
+            });
+
+            $( "#cantRowsDtTemp").change(function() {
+                var table = $('#tblTemporal').DataTable();
+                table.page.len(this.value).draw();
             });
 
             $("#titleModal")
@@ -203,12 +234,10 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
 
             $("#txtRuta")
             .empty()
-            .text(`VENDEDOR: `+nom_ruta);
+            .text(`VISITADOR: `+nom_ruta);
     
             $("#mdDetails").modal('show');
         } 
     })
-
-
 }
 </script>

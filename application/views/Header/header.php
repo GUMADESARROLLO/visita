@@ -45,6 +45,11 @@
     </li>
     <li class="nav-item">
       <a href="<?php echo base_url("index.php/pedidos")?>" class="nav-link text-dark">
+        <i class="fas fa-users mr-3 text-primary fa-1x"></i>Clientes
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="<?php echo base_url("index.php/visitas")?>" class="nav-link text-dark">
         <i class="fas fa-file-excel mr-3 text-primary fa-1x"></i>Reportes
       </a>
     </li>
@@ -66,7 +71,7 @@
 <!-- End vertical navbar -->
 <div class="page-content" id="content">
 
-<nav id="navbar-example2" class="navbar navbar-light bg-light">
+<nav id="navbar-example2" class="navbar navbar-light shadow-sm bg-white">
 <a id="sidebarCollapse"><i class="fa fa-bars mr-2"></i></a>
   <ul class="nav nav-pills">
 

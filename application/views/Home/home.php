@@ -1,20 +1,10 @@
 <div class="container-fluid p-4">
   <div class="row mt-0">
     <div class="col-sm-10 mt-0">
-      <button id="dom-id" class="btn btn-light text-danger fa-1x m-0"><i class="fas fa-calendar-day"></i> Filtrar por fecha</button>
+      <button id="dom-id" class="btn btn-light text-primary fa-1x m-0"><i class="fas fa-calendar-day"></i> Filtrar por fecha</button>
     </div>
     <div class="col-sm-2">
-      <select class="custom-select custom-select-sm float-right" style="width: 60%;" id="selectRuta">
-        <option selected value="">Todas</option>
-        <?php 
-        if ($rutas) {
-          foreach ($rutas as $key) {
-            echo '<option value="'.$key['value'].'">'.$key['desc'].'</option>';
-          }
-        }
-        ?>
-      </select>
-      <p class="mt-1 float-left">Rutas</p>
+
     </div>
   </div>
 	<div class="row">
@@ -41,7 +31,7 @@
               </div>
             </div>
           </div>
-          <table class="table table-bordered table-sm mt-3" id="tblVisitas" width="100%"></table>
+          <table class="table table-bordered table-sm mt-3" id="tblVisitas"></table>
         </div>
       </div>
 		</div>
@@ -52,13 +42,26 @@
         <div class="card-body">
           <h4 class="m-0 font-weight-bold mb-3">Médicos</h4>
           <div class="row">
-            <div class="col-sm-11">              
+            <div class="col-sm-8">              
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-search text-primary"></i></span>
                 </div>
                 <input type="text" id="filterDtMedicos" class="form-control" placeholder="Buscar en médicos">
               </div>
+            </div>
+            <div class="col-sm-3">
+              <select class="custom-select float-right" style="width: 80%;" id="selectRuta">
+                <option selected value="">Todos</option>
+                <?php 
+                if ($rutas) {
+                  foreach ($rutas as $key) {
+                    echo '<option value="'.$key['value'].'">'.$key['desc'].'</option>';
+                  }
+                }
+                ?>
+              </select>
+              <p class="mt-2 float-left">Rutas</p>
             </div>
             <div class="col-sm-1">
               <div class="input-group">

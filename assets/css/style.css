@@ -40,7 +40,7 @@
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 900px) {
   #sidebar {
     margin-left: -17rem;
   }
@@ -55,6 +55,12 @@
     margin-left: 17rem;
     width: calc(100% - 17rem);
   }
+}
+
+
+table.dataTable tfoot th, table.dataTable tfoot {
+  padding:  10px 8px 10px 10px!important;
+  text-align: right;
 }
 
 /*

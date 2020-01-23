@@ -21,3 +21,9 @@ $route['obtenerDetalleMedico']			= 'home_controller/returnDetalleMedico';
 $route['pedidos']						= 'pedidos_controller';
 $route['obtenerDataPedidos']			= 'pedidos_controller/returnDataPedido';
 $route['obtenerDetallePedido']			= 'pedidos_controller/returnDetallePedido';
+$route['downloadExcel']					= 'pedidos_controller/descargarExcelPedidos';
+
+//RUTAS: VISITAS
+$route['visitas']						= 'visitas_controller';
+$route['obtenerDataVisitas']			= 'visitas_controller/returnDataVisita';
+$route['obtenerDetVisita']				= 'visitas_controller/returnDetalleVisita';

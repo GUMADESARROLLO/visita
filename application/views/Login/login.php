@@ -1,7 +1,8 @@
 <section class="login-block">
     <div class="container">
 		<div class="row">
-			<div class="col-md-4 login-sec">
+			<div class="col-12 col-md-4 login-sec">
+				<img class="logo-movil" src="<?php echo base_url(); ?>assets/images/logogp.png" style="width: 100%; display: none">
 		    	<h2 class="text-center display-4">Inicia sesión</h2>
 		    	<form class="form" method="post" action="<?php echo base_url('index.php/acreditando')?>">
 					<div class="form-group">
@@ -19,10 +20,9 @@
 
 				<h5 style="color: red;" class="mt-3"><?php if(isset($mensaje)) echo $mensaje; ?></h5>
 				<span style="color: red;" class="mt-3"><?=validation_errors();?></span>
-				<div class="copy-text"><?php echo "UNIMARK S.A. Copyright ©".date("Y").""?></div>
+				<div class="copy-text"><?php echo "Copyright ©".date("Y").""?></div>
 			</div>
-			<div class="col-md-8 banner-sec">
-
+			<div class="col-12 col-md-8 banner-sec">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -39,5 +39,6 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </section>

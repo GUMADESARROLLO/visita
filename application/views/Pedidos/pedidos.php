@@ -1,12 +1,12 @@
 <div class="container-fluid p-4">
   <div class="row mt-0">
-    <div class="col-sm-10 mt-0">
-      <button id="dom-id" class="btn btn-light text-danger fa-1x m-0"><i class="fas fa-calendar-day"></i> Filtro por fecha</button>
+    <div class="col-sm-8 mt-0">
+      <button id="dom-id" class="btn btn-light text-primary fa-1x m-0"><i class="fas fa-calendar-day"></i> Filtro por Fechas</button>
 	<a id="exp-to-excel" href="#!" class="btn btn-light text-success"><i class="fas fa-file-excel"></i> Excel</a>
     </div>
-    <div class="col-sm-2">
-      <select class="custom-select custom-select-sm float-right" style="width: 60%;" id="selectRuta">
-        <option selected value="">Todas</option>
+    <div class="col-sm-4">
+      <select class="custom-select custom-select-sm float-right" style="width: 80%;" id="selectRuta">
+        <option selected value="ND">Todas</option>
         <?php 
         if ($rutas) {
           foreach ($rutas as $key) {

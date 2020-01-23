@@ -27,4 +27,8 @@ class pedidos_controller extends CI_Controller {
     public function returnDetallePedido() {
     	$this->pedidos_model->returnDetallePedido($this->input->post('idPedido'));
     }
+
+    public function descargarExcelPedidos($F1, $F2, $ruta) {
+    	$this->pedidos_model->descargarExcelPedidos($F1,$F2,$ruta);	
+    }
 }
