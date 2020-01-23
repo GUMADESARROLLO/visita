@@ -110,14 +110,34 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
     .empty()
     .html(`
     <div class="row pr-3 pl-3">
-        <div class="col-sm-12">      
-            <div class="row m-0">
-                <div class="col-sm-12">
-                    <p class="font-weight-bold m-0" id="txtPedido"></p>
-                    <p class="font-weight-bold m-0" id="txtCliente"></p>
-                    <p class="font-weight-bold mb-3" id="txtRuta"></p>
+        <div class="col-sm-12">
+
+            <div class="row pr-3 pl-3">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Comentario</h5>
+                            <p id="txt_comentario" class="card-text"></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Comentario anulacion</h5>
+                            <p id="txt_comentario_anulacion" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Estado</h5>
+                            <p id="txt_extado" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
             <div class="row">
 
                 <div class="col-sm-11">
@@ -142,11 +162,9 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
             </div>
             <table class="table table-bordered table-sm mt-3" id="tblTemporal" width="100%">
                 <tfoot>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <tr>
+                        <th colspan="6" style="text-align:right">Total:</th>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -183,7 +201,8 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
                     { "title": "Articulo",      "data": "ARTICULO" },
                     { "title": "Descripcion",   "data": "DESCRIPCION" },
                     { "title": "Cant.",         "data": "CANTIDAD", render: $.fn.dataTable.render.number( ',', '.', 0 ) },
-                    { "title": "Precio",        "data": "TOTAL" },
+                    { "title": "Precio",        "data": "PRECIOUND" },
+                    { "title": "Total",         "data": "TOTAL" },
                     { "title": "Bonificado",    "data": "BONIFICADO" }
                 ],
                 "columnDefs": [
@@ -191,23 +210,31 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
                     {"className": "dt-center",  "targets": [ 0, 2, 3, 4 ]},
                     /*{ "width": "50%",           "targets": [ 0,2 ] }*/
                 ],
-                initComplete: function () {
-                    var api = this.api();
-                    for (var i=0; i<=4; i++) {
-                        var tt  = 0;
-                        api.columns([i]).every( function () {
-                            this.data().each( function ( d, j ) {
-                                tt += parseFloat(numeral(d).format('00.00,00'));
-                            } );
-                        } );
-                        $retVal = ( i == 2 ) ? numeral(tt).format("0,0") : (numeral(tt).format("0,0.00"));
+               "footerCallback": function ( ) {
+                   var api = this.api();
 
-                        if ( i==3 ) {
-                            $( api.column( i ).footer() ).html($retVal);
-                        }
-                    }
-                    $("#tblTemporal_length, #tblTemporal_filter").hide();
-                }
+                   // Remove the formatting to get integer data for summation
+                   var intVal = function ( i ) {
+                       return typeof i === 'string' ?
+                           i.replace(/[\$,]/g, '')*1 :
+                           typeof i === 'number' ?
+                               i : 0;
+                   };
+
+                   // Total over all pages
+                   total = api
+                       .column( 4 )
+                       .data()
+                       .reduce( function (a, b) {
+                           return intVal(a) + intVal(b);
+                       }, 0 );
+
+                   // Update footer
+                   $( api.column( 4 ).footer() ).html(
+                       'C$ '+ numeral(total).format('0,0.00')
+                   );
+                   $("#tblTemporal_length, #tblTemporal_filter").hide();
+               }
             });
 
             $("#filterTmp1").on("keyup",function() {
@@ -222,22 +249,57 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente) {
 
             $("#titleModal")
             .empty()
-            .text(`Detalle de pedido`);
+            .text(nom_cliente);
 
             $("#txtPedido")
             .empty()
-            .text(`PEDIDO: `+idPedido);
+            .text(idPedido);
 
             $("#txtCliente")
             .empty()
-            .text(`CLIENTE: `+nom_cliente);
+            .text(nom_cliente);
 
             $("#txtRuta")
             .empty()
-            .text(`VISITADOR: `+nom_ruta);
+            .text("por " + nom_ruta);
+
+            var comentario_app = JSON.parse(response)[0]['Comentarios']['Comentario'];
+            var comentario_sac = JSON.parse(response)[0]['Comentarios']['Comentario_Confir'];
+            var comentario_est = JSON.parse(response)[0]['Comentarios']['Estado'];
+            var comentario_anu = JSON.parse(response)[0]['Comentarios']['Comentario_Anulacion'];
+
+            $("#txt_comentario").empty().text(comentario_app + " - " + comentario_sac);
+            $("#txt_extado").empty().html(Texto_estado(comentario_est));
+            $("#txt_comentario_anulacion").empty().text(comentario_anu);
+
+
+
+
     
             $("#mdDetails").modal('show');
         } 
     })
+}
+
+function Texto_estado(estado) {
+
+
+    switch (estado) {
+        case "1":
+            estado = '<div class="alert alert-info" role="alert">Recibido</div>';
+            break;
+        case "2":
+            estado = '<div class="alert alert-info" role="alert">visto</div>';
+            break;
+        case "3":
+            estado = '<div class="alert alert-success" role="alert">Procesado</div>';
+            break;
+        case "4":
+            estado = '<div class="alert alert-danger" role="alert">Anulado</div>';
+            break;
+
+    }
+    return estado;
+
 }
 </script>

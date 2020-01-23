@@ -66,16 +66,37 @@ class pedidos_model extends CI_Model {
     }
 
     public function returnDetallePedido($idPedido) {
-        $DTA=$this
-            ->db
-            ->where("IDPEDIDO", $idPedido)
-            ->get("pedido_detalle");
+        $DTA = $this->db->where("IDPEDIDO", $idPedido)->get("pedido_detalle");
+
+
+        $data=array(); $c=0;
 
         if ($DTA->num_rows()>0) {
-            echo json_encode( $DTA->result_array() );
-        }else {
-            echo json_encode(false);
+            foreach ($DTA->result_array() as $key) {
+                $data[$c]['IDPEDIDO']        = $key['IDPEDIDO'];
+                $data[$c]['ARTICULO']        = $key['ARTICULO'];
+                $data[$c]['DESCRIPCION']     = $key['DESCRIPCION'];
+                $data[$c]['CANTIDAD']        = $key['CANTIDAD'];
+                $data[$c]['PRECIOUND']       = $key['TOTAL'];
+                $data[$c]['TOTAL']           = $key['CANTIDAD'] * str_replace(",","",$key['TOTAL']);
+                $data[$c]['BONIFICADO']      = $key['BONIFICADO'];
+                $c++;
+            }
+
         }
+        $DTA_coment_null    = $this->db->where("IDPEDIDO", $idPedido)->get("anulaciones");
+        $coment_null        = ($DTA_coment_null->num_rows()>0) ? $DTA_coment_null->result_array()[0]['COMENTARIO'] : "-";
+
+        $DTA_coment         = $this->db->where("IDPEDIDO", $idPedido)->get("pedido");
+        $coment             = ($DTA_coment->num_rows()>0) ? $DTA_coment->result_array()[0]['COMENTARIO'] : "-";
+        $coment_confir      = ($DTA_coment->num_rows()>0) ? $DTA_coment->result_array()[0]['COMENTARIO_CONFIR'] : "-";
+
+        $data[0]['Comentarios']['Comentario_Anulacion']     = ($coment_null== null) ? "N/D" : $coment_null;
+        $data[0]['Comentarios']['Comentario_Confir']        = ($coment_confir == null) ? "N/D" : $coment_confir;
+        $data[0]['Comentarios']['Comentario']               = ($coment == null) ? "N/D" : $coment;
+        $data[0]['Comentarios']['Estado']                   = $DTA_coment->result_array()[0]['ESTADO'];
+        echo json_encode( $data );
+
     }
 
     public function returnNombreUsuario($ruta) {

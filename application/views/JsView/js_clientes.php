@@ -146,11 +146,10 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente,mCredito,mSaldo,mDispo) {
 
             <table class="table table-bordered table-sm mt-3" id="tblTemporal" width="100%">
                 <tfoot>
-            <tr>
-                <th colspan="6" style="text-align:right">Total:</th>
-
-            </tr>
-        </tfoot>
+                    <tr>
+                        <th colspan="6" style="text-align:right">Total:</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>`);
