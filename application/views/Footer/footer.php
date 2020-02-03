@@ -16,7 +16,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/sweetalert2.all.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/daterangepicker.min.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/highcharts.js')?>"></script>
-
+<script type="text/javascript" src="<?php echo base_url('assets/js/no-data-to-display.js')?>"></script>
 
 </body>
 </html>

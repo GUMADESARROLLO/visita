@@ -1,3 +1,12 @@
+var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1).replace('#!', '');
+
+$("ul.nav li.nav-item a").each(function() {    
+    if($(this).attr("href") == pgurl || $(this).attr("href") == '' ){
+        $(this).removeClass('text-black-50').addClass("text-primary");
+    }
+});
+
+
 $('.dropdown-toggle').dropdown();
 
 // Sidebar toggle behavior
