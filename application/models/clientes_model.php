@@ -61,6 +61,10 @@ class clientes_model extends CI_Model {
                 $Dta['FacturasActivas'][$i]['SALDO']       = number_format($key['SALDO'],2,".","");
                 $i++;
             }
+        }else{
+            $Dta['FacturasActivas'][$i]['DOCUMENTO']   = "";
+            $Dta['FacturasActivas'][$i]['FECHA']       = "";
+            $Dta['FacturasActivas'][$i]['SALDO']       = number_format(0,2,".","");
         }
 
         $i=0;
@@ -77,6 +81,15 @@ class clientes_model extends CI_Model {
                 $Dta['Mora'][$i]['Mas120']          = number_format($key['Mas120'],2,".","");
                 $i++;
             }
+        }else{
+            $Dta['Mora'][$i]['Nombre']          = "N/D";
+            $Dta['Mora'][$i]['Direccion']       = "N/D";
+            $Dta['Mora'][$i]['NoVencidos']      = number_format(0,2,".","");
+            $Dta['Mora'][$i]['Dias30']          = number_format(0,2,".","");
+            $Dta['Mora'][$i]['Dias60']          = number_format(0,2,".","");
+            $Dta['Mora'][$i]['Dias90']          = number_format(0,2,".","");
+            $Dta['Mora'][$i]['Dias120']         = number_format(0,2,".","");
+            $Dta['Mora'][$i]['Mas120']          = number_format(0,2,".","");
         }
 
         $i=0;
@@ -89,6 +102,11 @@ class clientes_model extends CI_Model {
                 $Dta['UltimosPagos'][$i]['MONTO_DEBITO']    = number_format($key['MONTO_DEBITO'],2,".","");
                 $i++;
             }
+        }else{
+            $Dta['UltimosPagos'][$i]['TIPO_CREDITO']    = "N/D";
+            $Dta['UltimosPagos'][$i]['FECHA']           = "N/D";
+            $Dta['UltimosPagos'][$i]['DEBITO']          = "N/D";
+            $Dta['UltimosPagos'][$i]['MONTO_DEBITO']    = number_format(0,2,".","");
         }
 
 
