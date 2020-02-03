@@ -34,3 +34,7 @@ $route['clientes_perfil/(:any)']        = 'clientes_controller/clientes_perfil/$
 $route['obtenerDataClientes']			= 'clientes_controller/returnDataClientes';
 $route['returnHistoricoCliente']		= 'clientes_controller/returnHistoricoCliente';
 
+//RUTAS: ESTADISTICAS
+$route['estadisticas']                  = 'estadisticas_controller';
+$route['listMeses']                  	= 'estadisticas_controller/returnListMeses';
+$route['dataVentas/(:any)/(:any)/(:any)']= 'estadisticas_controller/returnDataMeses/$1/$2/$3';

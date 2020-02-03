@@ -5,15 +5,17 @@
     <title>Visita Medica</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.dataTables.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/leaflet.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/leaflet.extra-markers.min.css">
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/fuente.css">
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/timeliner.min.css">
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/daterangepicker.min.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/style.css')?>" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.min.css')?>" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/jquery.dataTables.min.css')?>" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/leaflet.css')?>" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/leaflet.extra-markers.min.css')?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/fuente.css')?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/timeliner.min.css')?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/daterangepicker.css')?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/daterangepicker.min.css')?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/css/highslide.css')?>">
 </head>
 <body>
 <!-- Vertical navbar -->
@@ -40,7 +42,7 @@
     </li>
     <li class="nav-item">
       <a href="<?php echo base_url("index.php/pedidos")?>" class="nav-link text-dark">
-      	<i class="fas fa-clipboard mr-3 text-primary fa-1x"></i>Pedidos
+      	<i class="fas fa-clipboard mr-4 text-primary fa-1x"></i>Pedidos
       </a>
     </li>
     <li class="nav-item">
@@ -49,8 +51,13 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="<?php echo base_url("index.php/estadisticas")?>" class="nav-link text-dark">
+        <i class="fas fa-chart-line mr-3 text-primary fa-1x"></i>Estadisticas
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="<?php echo base_url("index.php/visitas")?>" class="nav-link text-dark">
-        <i class="fas fa-file-excel mr-3 text-primary fa-1x"></i>Reportes
+        <i class="fas fa-file-excel mr-4 text-primary fa-1x"></i>Reportes
       </a>
     </li>
   </ul>
