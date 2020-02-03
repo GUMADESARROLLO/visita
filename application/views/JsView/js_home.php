@@ -50,7 +50,6 @@ $( "#cDtVisitas").change(function() {
     var table = $('#tblVisitas').DataTable();
     table.page.len(this.value).draw();
 });
-
 function initMap(latitud,longitud) {    
 	$("#bodyModal")
     .empty()
