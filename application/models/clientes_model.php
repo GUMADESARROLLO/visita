@@ -49,5 +49,51 @@ class clientes_model extends CI_Model {
             echo json_encode(false);
         }
     }
+    public function InformacionCliente($idClientes) {
+        $Dta=array();
+
+        $i=0;
+        $query_FacturasActivas = $this->sqlsrv->fetchArray("SELECT t0.DOCUMENTO,CONVERT(VARCHAR,t0.FECHA,105) as FECHA,t0.SALDO FROM Softland.guma.documentos_cc t0 WHERE t0.cliente ='$idClientes'  and t0.SALDO > 0",SQLSRV_FETCH_ASSOC);
+        if (count($query_FacturasActivas)>0) {
+            foreach ($query_FacturasActivas as $key) {
+                $Dta['FacturasActivas'][$i]['DOCUMENTO']   = $key['DOCUMENTO'];
+                $Dta['FacturasActivas'][$i]['FECHA']       = $key['FECHA'];
+                $Dta['FacturasActivas'][$i]['SALDO']       = number_format($key['SALDO'],2,".","");
+                $i++;
+            }
+        }
+
+        $i=0;
+        $query_mora = $this->sqlsrv->fetchArray("SELECT TOP 1 * FROM GP_GMV_ClientesPerMora t0 WHERE t0.cliente ='$idClientes'",SQLSRV_FETCH_ASSOC);
+        if (count($query_mora)>0) {
+            foreach ($query_mora as $key) {
+                $Dta['Mora'][$i]['Nombre']          = $key['NOMBRE'];
+                $Dta['Mora'][$i]['Direccion']       = $key['DIRECCION'];
+                $Dta['Mora'][$i]['NoVencidos']      = number_format($key['NoVencidos'],2,".","");
+                $Dta['Mora'][$i]['Dias30']          = number_format($key['Dias30'],2,".","");
+                $Dta['Mora'][$i]['Dias60']          = number_format($key['Dias60'],2,".","");
+                $Dta['Mora'][$i]['Dias90']          = number_format($key['Dias90'],2,".","");
+                $Dta['Mora'][$i]['Dias120']         = number_format($key['Dias120'],2,".","");
+                $Dta['Mora'][$i]['Mas120']          = number_format($key['Mas120'],2,".","");
+                $i++;
+            }
+        }
+
+        $i=0;
+        $query_mora = $this->sqlsrv->fetchArray("SELECT TOP 10 t0.TIPO_CREDITO,CONVERT(VARCHAR,t0.FECHA,105) as FECHA ,t0.DEBITO,t0.MONTO_DEBITO FROM Softland.guma.AUXILIAR_CC t0 WHERE t0.cli_doc_debito ='$idClientes' AND t0.TIPO_CREDITO= 'REC' ORDER BY t0.FECHA DESC",SQLSRV_FETCH_ASSOC);
+        if (count($query_mora)>0) {
+            foreach ($query_mora as $key) {
+                $Dta['UltimosPagos'][$i]['TIPO_CREDITO']    = $key['TIPO_CREDITO'];
+                $Dta['UltimosPagos'][$i]['FECHA']           = $key['FECHA'];
+                $Dta['UltimosPagos'][$i]['DEBITO']          = $key['DEBITO'];
+                $Dta['UltimosPagos'][$i]['MONTO_DEBITO']    = number_format($key['MONTO_DEBITO'],2,".","");
+                $i++;
+            }
+        }
+
+
+        return $Dta;
+    }
 
 }
+

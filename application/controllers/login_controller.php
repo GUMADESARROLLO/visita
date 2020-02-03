@@ -12,8 +12,12 @@ class login_controller extends CI_Controller {
 	}
 
     public function index() {
+        $ApplicationVersion = new git_version();
+        $data = [
+            'appVersion' => $ApplicationVersion::get(),
+        ];
         $this->load->view('header/header_login');
-		$this->load->view('Login/login');
+		$this->load->view('Login/login',$data);
 		$this->load->view('footer/footer_login');
     }
 

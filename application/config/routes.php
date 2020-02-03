@@ -30,6 +30,7 @@ $route['obtenerDetVisita']				= 'visitas_controller/returnDetalleVisita';
 
 //RUTAS: CLIENTES
 $route['clientes']                      = 'clientes_controller';
+$route['clientes_perfil/(:any)']        = 'clientes_controller/clientes_perfil/$1';
 $route['obtenerDataClientes']			= 'clientes_controller/returnDataClientes';
 $route['returnHistoricoCliente']		= 'clientes_controller/returnHistoricoCliente';
 

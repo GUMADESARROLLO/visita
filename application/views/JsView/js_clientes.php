@@ -241,7 +241,7 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente,mCredito,mSaldo,mDispo) {
 
             $("#titleModal")
             .empty()
-            .text('[' + idPedido +'] - ' + nom_ruta);
+            .text('[' + idPedido +'] - ' + nom_ruta );
 
 
             $("#txtCliente")
@@ -251,7 +251,7 @@ function detailsPedido(idPedido, nom_ruta, nom_cliente,mCredito,mSaldo,mDispo) {
 
 
             $('#objtCredi').empty().text('C$ ' + mCredito);
-            $('#objtSaldo').empty().html('C$ ' + mSaldo);
+            $('#objtSaldo').empty().html('<a href="clientes_perfil/' + idPedido + '" target="_blank">C$ ' + mSaldo + '</a>');
             $('#objtDispo').empty().text('C$ ' + mDispo);
 
             $('#txtRangeDate').empty().text(JSON.parse(response)[0]['DateRange']);

@@ -20,7 +20,11 @@
 
 				<h5 style="color: red;" class="mt-3"><?php if(isset($mensaje)) echo $mensaje; ?></h5>
 				<span style="color: red;" class="mt-3"><?=validation_errors();?></span>
-				<div class="copy-text"><?php echo "Copyright ©".date("Y").""?></div>
+				<div class="copy-text">
+                    <?php echo "Copyright ©".date("Y").""?>
+                    <span style="color: #B2B2B2; font-size: 10px"> <?php echo $appVersion?></span>
+                </div>
+
 			</div>
 			<div class="col-12 col-md-8 banner-sec">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

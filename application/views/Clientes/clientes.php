@@ -58,6 +58,7 @@
                 </button>
 
             </div>
+
             <div class="row">
                 <div class="col-sm">
                     <p class="font-weight-bold m-0 " id="txtCliente"></p>

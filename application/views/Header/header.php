@@ -23,7 +23,7 @@
   <div class="py-4 px-3 mb-4 bg-light text-center">
     <div class="">
       <a href="<?php echo base_url("index.php/home")?>">
-        <img src="<?php echo base_url(); ?>assets/images/logogp.png" alt="..." width="200" class="">
+        <img src="<?php echo base_url('assets/images/logogp.png'); ?>" alt="..." width="200" class="">
       </a>
     </div>
       <div class="media-body">

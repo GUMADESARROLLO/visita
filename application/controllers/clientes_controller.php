@@ -25,13 +25,11 @@ class clientes_controller extends CI_Controller {
     public function returnHistoricoCliente() {
         $this->clientes_model->returnHistoricoCliente($this->input->post('idCliente'));
     }
-    public function actividad($id){
-
+    public function clientes_perfil($id){
+        $data['AllData'] = $this->clientes_model->InformacionCliente($id);
         $this->load->view('Header/header');
-        $this->load->view('Clientes/actividades');
+        $this->load->view('Clientes/clientes_perfil', $data);
         $this->load->view('Footer/footer');
-        $this->load->view('JsView/js_actividades');
+        $this->load->view('JsView/js_clientes_perfil');
     }
-
-
 }
