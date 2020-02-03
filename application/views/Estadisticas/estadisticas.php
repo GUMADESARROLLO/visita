@@ -11,32 +11,44 @@
 	        <div class="card-body">
 	          <div class="row">
 	            <div class="col-sm-3">
-                <h4 class="font-weight-bold mb-3" id="vTotal"></h4>
+                <div class="form-group">
+                  <label for="vTotal" class="p-0 m-0 title-01">Total de venta</label>
+                  <h4 class="font-weight-bold mb-3" id="vTotal"></h4>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <select class="form-control form-control-sm" id="cmbRutas">
-                  <?php
-                  if ($rutas) {
-                    foreach ($rutas as $key) {
-                      if ($key === reset($rutas)) {
-                        echo '<option value="'.$key['value'].'" selected>'.$key['desc'].'</option>';
-                      }else {
-                        echo '<option value="'.$key['value'].'">'.$key['desc'].'</option>';
-                      }                      
-                    }               
-                  }
-                  ?>
-                  
-                </select>
+              <div class="col-sm-4 border-left">
+                <div class="form-group">
+                  <label for="cmbRutas" class="p-0 m-0 title-01">Visitador</label>
+                  <select class="form-control form-control-sm" id="cmbRutas">
+                    <?php
+                    if ($rutas) {
+                      foreach ($rutas as $key) {
+                        if ($key === reset($rutas)) {
+                          echo '<option value="'.$key['value'].'" selected>'.$key['desc'].'</option>';
+                        }else {
+                          echo '<option value="'.$key['value'].'">'.$key['desc'].'</option>';
+                        }                      
+                      }               
+                    }
+                    ?>
+                    
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-2 border-left">
+                <div class="form-group">
+                  <label for="F1" class="p-0 m-0 title-01">Desde</label>
+                  <input type="text" class="form-control form-control-sm" name="F1" id="F1" />
+                </div>
               </div>
               <div class="col-sm-2">
-                <input type="text" class="form-control form-control-sm" name="F1" id="F1" />
-              </div>
-              <div class="col-sm-2">
-                <input type="text" class="form-control form-control-sm" name="F2" id="F2" />
+                <div class="form-group">
+                  <label for="F2" class="p-0 m-0 title-01">Hasta</label>
+                  <input type="text" class="form-control form-control-sm" name="F2" id="F2" />
+                </div>                
               </div>
               <div class="col-sm-1">
-                <a href="#!" class="btn btn-primary btn-sm" id="appFiltro">Aplicar</a>
+                <a href="#!" class="btn btn-primary btn-sm mt-4" id="appFiltro">Mostrar</a>
               </div>
 	          </div>
             <div class="row mt-2">
@@ -46,10 +58,10 @@
                 </figure>
               </div>
               <div class="col-sm-3 border-left">
-                <p class="font-weight-bold">Venta mas alta</p>
+                <p class="font-weight-bold">Dia mas alto</p>
                 <h4 class="font-weight-bold mb-3" id="vntMax"></h4>
                 <hr>
-                <p class="font-weight-bold mt-3">Venta mas baja</p>
+                <p class="font-weight-bold mt-3">Dia mas bajo</p>
                 <h4 class="font-weight-bold mb-3" id="vntMin"></h4>
               </div>
             </div>

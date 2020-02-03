@@ -76,6 +76,7 @@ $(document).ready( function() {
             borderWidth: 0
         },
         plotOptions: {
+
         },
         series: [],
         responsive: {
@@ -121,8 +122,6 @@ function initGraf(F1, F2, Rta) {
             vts_max = Math.max.apply(null, item['Mont']);
             vts_min = Math.min.apply(null, item['Mont']);
         })
-
-        console.log(vts_max);
 
         var chart = new Highcharts.Chart(ventas);
         $("#vTotal")

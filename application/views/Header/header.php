@@ -36,27 +36,27 @@
   <p class="font-weight-bold text-uppercase px-3 small pb-4 mb-0 text-center">Menu</p>
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/home")?>" class="nav-link text-dark bg-light">
+      <a href="home" class="nav-link text-black-50 bg-light">
       	<i class="fa fa-home mr-3 text-primary fa-1x"></i>Home
       </a>
     </li>
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/pedidos")?>" class="nav-link text-dark">
+      <a href="pedidos" class="nav-link text-black-50 bg-light">
       	<i class="fas fa-clipboard mr-4 text-primary fa-1x"></i>Pedidos
       </a>
     </li>
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/clientes")?>" class="nav-link text-dark">
+      <a href="clientes" class="nav-link text-black-50 bg-light">
         <i class="fas fa-users mr-3 text-primary fa-1x"></i>Clientes
       </a>
     </li>
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/estadisticas")?>" class="nav-link text-dark">
+      <a href="estadisticas" class="nav-link text-black-50 bg-light">
         <i class="fas fa-chart-line mr-3 text-primary fa-1x"></i>Estadisticas
       </a>
     </li>
     <li class="nav-item">
-      <a href="<?php echo base_url("index.php/visitas")?>" class="nav-link text-dark">
+      <a href="visitas" class="nav-link text-black-50 bg-light">
         <i class="fas fa-file-excel mr-4 text-primary fa-1x"></i>Reportes
       </a>
     </li>
@@ -64,12 +64,12 @@
   <p class="font-weight-bold text-uppercase px-3 small py-4 mb-0 text-center">Mas</p>
   <ul class="nav flex-column bg-white mb-0">
   <li class="nav-item">
-    <a href="#" class="nav-link text-dark bg-light">
+    <a href="#" class="nav-link text-black-50 bg-light">
       <i class="fa fa-lock mr-3 text-primary fa-fw"></i>Cambiar contraseña
     </a>
   </li>
   <li class="nav-item">
-    <a href="<?php echo base_url("index.php/salir")?>" class="nav-link text-dark">
+    <a href="<?php echo base_url("index.php/salir")?>" class="nav-link text-black-50 bg-light">
       <i class="fas fa-sign-out-alt mr-3 text-primary fa-fw"></i>Cerrar sesión
     </a>
   </li>
