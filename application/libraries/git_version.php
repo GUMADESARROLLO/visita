@@ -9,7 +9,7 @@
 class git_version
 {
     const MAJOR = 1;
-    const MINOR = 2;
+    const MINOR = 3;
 
     public static  function get()
     {
