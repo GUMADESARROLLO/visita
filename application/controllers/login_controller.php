@@ -22,6 +22,10 @@ class login_controller extends CI_Controller {
     }
 
 	public function acreditarCuenta() {
+        $ApplicationVersion = new git_version();
+        $datos = [
+            'appVersion' => $ApplicationVersion::get(),
+        ];
 	    $this->form_validation->set_rules('usuario', 'Usuario', 'required|min_length[3]');
 	    $this->form_validation->set_rules('password', 'Contraseña', 'required|min_length[3]');
 
